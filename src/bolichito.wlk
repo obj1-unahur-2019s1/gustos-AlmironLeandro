@@ -1,4 +1,5 @@
 import objetos.*
+import personas.*
 
 object bolichito {
 	var objetoEnMostrador
@@ -6,10 +7,10 @@ object bolichito {
 	
 	method ponerEnMostrador(objeto) { objetoEnMostrador = objeto }
 	method ponerEnVidriera(objeto) { objetoEnVidriera = objeto }
-	
+	//precondicion, debe primero cargarse las variables(objeto).
 	method esBrillante() { 
-		const elDeMostradorBrilla = true   // implementar
-		const elDeVidrieraBrilla = true   // implementar
+		const elDeMostradorBrilla = objetoEnMostrador.material().brilla() // implementar
+		const elDeVidrieraBrilla =	objetoEnVidriera.material().brilla() // implementar
 		return elDeMostradorBrilla and elDeVidrieraBrilla
 	}
 	
@@ -18,14 +19,18 @@ object bolichito {
 	}
 	
 	method estaDesequilibrado() {
-		// completar
+		return objetoEnMostrador.peso()>objetoEnVidriera.peso()
+
 	}
-	
+	// completar
+	method puedeMejorar(){
+	   return seft.estaDesequlibrado() or self.esMonocromatico()
+	}
 	method tieneAlgoDeColor(color) {
-		// completar
+	return objetoEnMostrador.color()==color || objetoEnVidriera.color()==color
 	}
 
 	method puedeOfrecerleAlgoA(persona) {
-		// completar
+			return persona.leGusta (objetoEnMostrador) or persona.leGusta (objetoEnVidriera)
 	}
 }
